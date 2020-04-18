@@ -18,7 +18,7 @@ def map_tab(dataframe, google_api_key):
 		else:
 			scaler = MinMaxScaler(feature_range=(0,0.8))
 			scaler.fit(df[[dataframe.columns[-6]]])
-			df['Size'] = 40*scaler.transform(df[[col]])
+			df['Size'] = 50*scaler.transform(df[[col]])
 
 		return df
 
@@ -65,8 +65,8 @@ def map_tab(dataframe, google_api_key):
 
 		# Title
 		p.title.align = 'center'
-		p.title.text_font_size = '20pt'
-		p.title.text_font = 'serif'
+		p.title.text_font_size = '18pt'
+		#p.title.text_font = 'serif'
 
 		# Axis titles
 		p.xaxis.axis_label_text_font_size = '14pt'

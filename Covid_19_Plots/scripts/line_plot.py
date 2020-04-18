@@ -56,7 +56,7 @@ def line_tab(dataframe, tab_title):
 			p.circle(x='index', y=group, source=src, size=6, legend_label=group, color=color)
 
 			hover = HoverTool(tooltips =[
-				('Date','@index{%F}'),('Deaths today','$y{0}')],
+				('Date','@index{%F}'),(y_title,'$y{0}')],
 				formatters={'@index': 'datetime'})
 
 			p.add_tools(hover)
@@ -72,8 +72,8 @@ def line_tab(dataframe, tab_title):
 
 		# Title
 		p.title.align = 'center'
-		p.title.text_font_size = '20pt'
-		p.title.text_font = 'serif'
+		p.title.text_font_size = '18pt'
+		#p.title.text_font = 'serif'
 
 		# Axis titles
 		p.xaxis.axis_label_text_font_size = '14pt'
@@ -93,7 +93,7 @@ def line_tab(dataframe, tab_title):
 
 		menu = Select(options=available_statistics, value=available_statistics[0],
 		              title='Statistic to plot',
-		              width=150)
+		              width=150, sizing_mode = "scale_width")
 
 		return menu
 
@@ -117,11 +117,12 @@ def line_tab(dataframe, tab_title):
 
 	stats_explanation = Div(text=stats_explanations[dataframe.columns.get_level_values(
 		1).unique().values[0]], name='Statistics explanation', width=150,
-	                        style={'font-size': '100%', 'color': 'black'})
+	                        style={'font-size': '120%', 'color': 'white'}, sizing_mode =
+	                        "scale_width")
 
 	col = column(statistic_selection, stats_explanation)
 	layout = row(col, make_plot(src))
-	tab = Panel(child=layout, title=tab_title, )
+	tab = Panel(child=layout, title=tab_title)
 
 
 	return tab
