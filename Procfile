@@ -1,1 +1,1 @@
-web: bokeh serve --port=5000 --address=0.0.0.0 --allow-websocket-origin=covid-19-uk-bokeh-plots.herokuapp.com --use-xheaders Covid_19_Plots/
+web: bokeh serve --port=$PORT --address=0.0.0.0 --allow-websocket-origin=covid-19-uk-bokeh-plots.herokuapp.com --use-xheaders Covid_19_Plots/
