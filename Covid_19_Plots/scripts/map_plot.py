@@ -47,7 +47,7 @@ def map_tab(dataframe, google_api_key):
 
 
 		p = gmap(api_key, map_options, title="Covid-19 deaths by Trust - (Updated " + str(
-			date.today()) + ")", plot_width=1200, plot_height=900)
+			date.today()) + ")", plot_width=900, plot_height=700)
 
 		hover = HoverTool(tooltips =[
 			('Name','@Name'),('Deaths','@Deaths')])
