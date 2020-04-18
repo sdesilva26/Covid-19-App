@@ -1,15 +1,19 @@
 
-def get_todays_data(url, filename):
+def get_todays_data(url, filename, today=True):
 	import urllib.request
 	import requests
 	from bs4 import BeautifulSoup
-	from datetime import date
+	from datetime import date, timedelta
 
 	response = requests.get(url)
 
 	soup = BeautifulSoup(response.text, "html.parser")
 
-	dateTimeObj = date.today()
+	if(today):
+		dateTimeObj = date.today()
+	else:
+		dateTimeObj = date.today() - timedelta(days=1)
+
 	timestampStr = dateTimeObj.strftime("%d %B %y")
 
 	all_hplinks = soup.find_all('a')
@@ -22,3 +26,4 @@ def get_todays_data(url, filename):
 	print("Downloading data from link: " + str(all_hplinks[index[0]]['href']))
 	total_deaths_link = all_hplinks[index[0]]['href']
 	urllib.request.urlretrieve(total_deaths_link, filename)
+	print('Successfully downloaded data')
