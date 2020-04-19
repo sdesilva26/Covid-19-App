@@ -7,10 +7,6 @@ import os
 from bokeh.io import curdoc
 from bokeh.models.widgets import Tabs
 
-# Fetch the data and preprocess it
-print("Getting today's data...")
-# get_todays_data("https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-daily-deaths/",
-#                 "./data/COVID-19-total-announced-deaths.xlsx", today=True)
 print("Cleaning the data...")
 raw_data_trusts, raw_data_age, raw_data_region = clean_data(
     "./Covid_19_Plots/data/COVID-19-total-announced-deaths.xlsx")

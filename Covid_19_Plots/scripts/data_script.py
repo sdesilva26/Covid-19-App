@@ -1,0 +1,1 @@
+from data_acquisition import get_todays_dataimport sys# Fetch the data and preprocess itprint("Getting today's data...")get_todays_data("https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-daily-deaths/",                sys.argv[1], today=True)
