@@ -5,3 +5,4 @@ geopy==1.21.0
 numpy==1.18.2
 requests==2.23.0
 sklearn==0.0
+pandas==1.0.3
