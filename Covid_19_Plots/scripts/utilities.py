@@ -56,8 +56,13 @@ def google_address_from_address(datapoint, google_api_key):
 
 def get_last_updated(filepath):
 	import time
+	from datetime import datetime
 	import os
+	import pytz
 	modTimeSinceEpoch = os.path.getmtime(filepath)
-	modTime = time.strftime("%d %B %y at %H:%M:%S", time.localtime(modTimeSinceEpoch))
+	modTimeUTC = datetime.utcfromtimestamp(modTimeSinceEpoch).replace(tzinfo=pytz.utc)
+	tz = pytz.timezone('Europe/London')
+	dt = modTimeUTC.astimezone(tz)
+	modTime = dt.strftime("%d %B %y at %H:%M:%S")
 
 	return modTime
