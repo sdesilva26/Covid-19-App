@@ -1,27 +1,29 @@
 from bokeh.layouts import row, column
-from bokeh.models import Panel
-from bokeh.models.widgets import Paragraph, Div
-y_label_title = {'deaths today': 'Deaths per day',
-                 'cumulative total': 'Total deaths',
-                 'change': 'Change in deaths',
-                 'relative change': 'Change in deaths (%)'}
-stats_explanations = {'deaths today': '</br> <b>deaths today:</b> the deaths recorded today that '
+from bokeh.models import Panel, Label
+from bokeh.models.widgets import Div
+from scripts.information_paragraph import make_info_paragraph
+from scripts.utilities import get_last_updated
+y_label_title = {'Deaths Today': 'Deaths',
+                 'Cumulative Total': 'Total deaths',
+                 'Change': 'Change in deaths',
+                 'Relative Change': 'Change in deaths (%)'}
+stats_explanations = {'Deaths Today': '</br> <b>Deaths Today:</b> the deaths recorded today that '
                                       'list '
                                       'Covid-19 as cause of death',
-                 'cumulative total': '</br><b>cumulative total:</b> the total deaths recorded up '
+                 'Cumulative Total': '</br><b>Cumulative Total:</b> the total deaths recorded up '
                                      'until today '
                                      'that list Covid-19 as a cause of death',
-                 'change': '</br><b>change:</b> the change in deaths due to Covid-19 compared to '
+                 'Change': '</br><b>Change:</b> the change in deaths due to Covid-19 compared to '
                            'the deaths '
                            'on the previous days',
-                 'relative change': '</br><b>relative change:</b> the change in deaths due to '
+                 'Relative Change': '</br><b>Relative Change:</b> the change in deaths due to '
                                     'Covid-19 '
                                     'compared to the deaths '
                                     'on the previous days shown as a percentage'}
 
 
 
-def line_tab(dataframe, tab_title):
+def line_tab(dataframe, tab_title, filepath):
 
 	def make_dataset(type_of_plot):
 		import pandas as pd
@@ -39,7 +41,7 @@ def line_tab(dataframe, tab_title):
 	def make_plot(src):
 		from bokeh.plotting import figure
 		from bokeh.models import HoverTool
-		from bokeh.palettes import Dark2_5 as palette
+		from bokeh.palettes import Dark2_8 as palette
 		import itertools
 
 		groups = dataframe.columns.get_level_values(0).unique().values
@@ -101,7 +103,7 @@ def line_tab(dataframe, tab_title):
 	# # Update the plot based on selections
 	def callback(attr, old, new):
 		new_src = make_dataset(statistic_selection.value)
-		layout.children[1] = make_plot(new_src)
+		two_col_row.children[1] = make_plot(new_src)
 		stats_explanation.text = stats_explanations[statistic_selection.value]
 		#src.data.update(new_src.data)
 
@@ -117,13 +119,16 @@ def line_tab(dataframe, tab_title):
 
 	stats_explanation = Div(text=stats_explanations[dataframe.columns.get_level_values(
 		1).unique().values[0]], name='Statistics explanation', width=150,
-	                        style={'font-size': '120%', 'color': 'white'}, sizing_mode =
-	                        "scale_width")
+	                        style={'font-size': '120%', 'color': 'white'})
 
-	col = column(statistic_selection, stats_explanation)
-	layout = row(col, make_plot(src))
+	last_updated = Div(text='<b>Last updated:</b> ' + get_last_updated(filepath), name='Last '
+	                                                                                  'updated '
+	                'text', style={'font-size': '120%', 'color': 'white'}, width=150)
+
+	col = column(statistic_selection, stats_explanation, last_updated)
+	two_col_row = row(col, make_plot(src))
+	layout = column(two_col_row, make_info_paragraph())
 	tab = Panel(child=layout, title=tab_title)
-
 
 	return tab
 

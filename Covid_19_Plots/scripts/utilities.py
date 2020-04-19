@@ -53,3 +53,11 @@ def google_address_from_address(datapoint, google_api_key):
 		datapoint['address'] = location.address
 
 	return datapoint
+
+def get_last_updated(filepath):
+	import time
+	import os
+	modTimeSinceEpoch = os.path.getmtime(filepath)
+	modTime = time.strftime("%d %B %y at %H:%M:%S", time.localtime(modTimeSinceEpoch))
+
+	return modTime

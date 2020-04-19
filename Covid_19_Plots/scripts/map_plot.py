@@ -1,11 +1,14 @@
-from bokeh.layouts import row
+from bokeh.layouts import row, column
 from bokeh.models import Panel
+from bokeh.models.widgets import Div
+from scripts.information_paragraph import make_info_paragraph
+from scripts.utilities import get_last_updated
 
 colormap = {'East Of England':'black', 'London': 'blue', 'Midlands':'red',
             'North East And Yorkshire':'green', 'North East and Yorkshire':'orange',
             'North West':'grey', 'South East':'purple', 'South West':'white'}
 
-def map_tab(dataframe, google_api_key):
+def map_tab(dataframe, google_api_key, filepath):
 
 	def add_plot_styles(col):
 		from sklearn.preprocessing import MinMaxScaler
@@ -57,6 +60,7 @@ def map_tab(dataframe, google_api_key):
 		         legend_group="Region", fill_color = 'Color', line_color='black', line_width=0.5)
 
 		p.legend.click_policy="hide"
+		p.legend.location = "top_left"
 		p = style(p)
 		return p
 
@@ -84,17 +88,11 @@ def map_tab(dataframe, google_api_key):
 		from bokeh.models.widgets import Select
 		available_dates = list(dataframe.columns[3:-4].values)
 
-		menu = Select(options=available_dates, value='Total', title='Data', width=150)
+		menu = Select(options=available_dates, value='Total', title='Data', width=150, sizing_mode = "scale_width")
 
 		return menu
 
-	def get_selection(checkbox):
-		date_selected = []
-		for i, act in enumerate(checkbox.active):
-			if act == 1:
-				date_selected.append(checkbox.labels[i])
-				break
-		return date_selected
+
 
 	def callback(attr, old, new):
 		new_src = make_dataset(date_selection.value)
@@ -114,7 +112,12 @@ def map_tab(dataframe, google_api_key):
 	# Make the plot
 	p = make_plot(src, google_api_key)
 
-	layout = row(date_selection, p)
+	last_updated = Div(text='<b>Last updated:</b> ' + get_last_updated(filepath), name='Last '
+						'updated text', style={'font-size': '120%', 'color': 'white'}, width=150)
+	col_1 = column(date_selection, last_updated)
+	row_1 = row(col_1, p)
+	col_2 = column(row_1, make_info_paragraph())
+	layout = col_2
 	tab = Panel(child=layout, title='Map')
 
 	return tab

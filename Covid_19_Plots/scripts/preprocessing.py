@@ -75,17 +75,17 @@ def add_statistics(dataframe):
 	import numpy as np
 
 	array = [dataframe.columns.values,
-	         ['deaths today', 'cumulative total', 'change', 'relative change']]
+	         ['Deaths Today', 'Cumulative Total', 'Change', 'Relative Change']]
 
 	index = pd.MultiIndex.from_product(array, names=['Age group', 'Death data'])
 
 	df_restructure = pd.DataFrame(index = dataframe.index, columns=index)
 
 	for col in dataframe.columns:
-		df_restructure.loc[:, (col, 'deaths today')] = dataframe[col]
-		df_restructure.loc[:, (col, 'change')] = dataframe[col].diff()
-		df_restructure.loc[:, (col, 'relative change')] = dataframe[col].pct_change()*100
-		df_restructure.loc[:, (col, 'cumulative total')] = dataframe[col].values.cumsum()
+		df_restructure.loc[:, (col, 'Deaths Today')] = dataframe[col]
+		df_restructure.loc[:, (col, 'Change')] = dataframe[col].diff()
+		df_restructure.loc[:, (col, 'Relative Change')] = dataframe[col].pct_change()*100
+		df_restructure.loc[:, (col, 'Cumulative Total')] = dataframe[col].values.cumsum()
 
 	df_restructure.replace(to_replace=np.Inf, value=np.NaN, inplace=True)
 

@@ -22,9 +22,9 @@ raw_data_age = add_statistics(raw_data_age)
 print("Matching NHS Trusts' locations...")
 data_trusts_complete = append_location_data(raw_data_trusts, "./Covid_19_Plots/data/locations.csv",)
 
-tab1 = map_tab(data_trusts_complete, os.getenv('GOOGLE_API_KEY'))
-tab2 = line_tab(raw_data_age, "Age")
-tab3 = line_tab(raw_data_region, "Region")
+tab1 = map_tab(data_trusts_complete, os.getenv('GOOGLE_API_KEY'), "./Covid_19_Plots/data/COVID-19-total-announced-deaths.xlsx")
+tab2 = line_tab(raw_data_age, "Age", "./Covid_19_Plots/data/COVID-19-total-announced-deaths.xlsx")
+tab3 = line_tab(raw_data_region, "Region", "./Covid_19_Plots/data/COVID-19-total-announced-deaths.xlsx")
 
 tabs = Tabs(tabs=[tab1, tab2, tab3])
 
