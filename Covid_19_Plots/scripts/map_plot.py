@@ -4,16 +4,30 @@ from bokeh.models.widgets import Div
 from scripts.information_paragraph import make_info_paragraph
 from scripts.utilities import get_last_updated
 
-colormap = {'East Of England':'black', 'London': 'blue', 'Midlands':'red',
-            'North East And Yorkshire':'green', 'North East and Yorkshire':'orange',
-            'North West':'grey', 'South East':'purple', 'South West':'white'}
+
+# colormap = {'East Of England':'black', 'London': 'blue', 'Midlands':'red',
+#             'North East And Yorkshire':'green', 'North East and Yorkshire':'orange',
+#             'North West':'grey', 'South East':'purple', 'South West':'white'}
 
 def map_tab(dataframe, google_api_key, filepath):
 
+	def make_colormap(dataframe):
+		import itertools
+		from bokeh.palettes import Dark2_8 as palette
+		colors = itertools.cycle(palette)
+		groups = dataframe['NHS England Region'].unique()
+		colormap = dict()
+		for color, group in zip(colors, groups):
+			colormap[group] = color
+
+		return colormap
+
 	def add_plot_styles(col):
 		from sklearn.preprocessing import MinMaxScaler
+		from bokeh.palettes import Dark2_8 as palette
 		df = dataframe
-		df['color'] = df['NHS England Region'].map(lambda x: colormap[x])
+		cmap = make_colormap(dataframe)
+		df['color'] = df['NHS England Region'].apply(lambda x: cmap[x])
 
 		if col == 'Total':
 			scaler = MinMaxScaler(feature_range=(0.1,1))
@@ -28,6 +42,7 @@ def map_tab(dataframe, google_api_key, filepath):
 	def make_dataset(date):
 		from bokeh.models import ColumnDataSource
 		df = add_plot_styles(date)
+
 		data = {'Region': df['NHS England Region'],
 		        'Name': df['Name'],
 		        'Deaths': df[date],

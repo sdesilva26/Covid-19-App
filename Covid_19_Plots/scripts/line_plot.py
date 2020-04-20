@@ -48,8 +48,7 @@ def line_tab(dataframe, tab_title, filepath):
 		from bokeh.palettes import Dark2_8 as palette
 		import itertools
 
-		groups = dataframe.columns.get_level_values(0).unique().values
-		type_of_data = dataframe.columns.get_level_values(0).name
+		groups = src.column_names[1:]
 
 		y_title = y_label_title[statistic_selection.value]
 
@@ -59,17 +58,15 @@ def line_tab(dataframe, tab_title, filepath):
 		colors = itertools.cycle(palette)
 
 		for group, color in zip(groups, colors):
-		# p.line(x='index', y='Deaths', source=src, line_width=1, legend_label=type_of_data)
-		# p.circle(x='index', y='Deaths', source=src, size=6, legend_label=type_of_data)
-			p.multi_line(xs='index', ys=group,
-		             line_width=5, line_alpha=0.6, hover_line_alpha=1.0,
-		             source=src)
+			p.line(x='index', y=group, source=src, line_width=1, legend_label=group, color=color)
+			circle = p.circle(x='index', y=group, source=src, size=6, legend_label=group,
+			                 color=color)
 
-		hover = HoverTool(tooltips =[(type_of_data, '@columns}'),
-		 	('Date','@index{%F}'),(y_title,'@Deaths{0}')],
-		 	formatters={'@index': 'datetime'})
+			hover = HoverTool(tooltips =[('Group', group),
+					    ('Date','@index{%F}'),(y_title,'@y{int}')],
+					    formatters={'@index': 'datetime'},  renderers=[circle])
 
-		p.add_tools(hover)
+			p.add_tools(hover)
 
 		p.legend.location = "top_left"
 		p.legend.click_policy="hide"

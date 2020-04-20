@@ -22,6 +22,6 @@ tab1 = map_tab(data_trusts_complete, os.getenv('GOOGLE_API_KEY'), "./Covid_19_Pl
 tab2 = line_tab(raw_data_age, "Age", "./Covid_19_Plots/data/COVID-19-total-announced-deaths.xlsx")
 tab3 = line_tab(raw_data_region, "Region", "./Covid_19_Plots/data/COVID-19-total-announced-deaths.xlsx")
 
-tabs = Tabs(tabs=[tab1, tab2, tab3])
+tabs = Tabs(tabs=[tab1, tab3, tab2])
 
 curdoc().add_root(tabs)
