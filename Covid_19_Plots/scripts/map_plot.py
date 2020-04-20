@@ -137,8 +137,8 @@ def map_tab(dataframe, google_api_key, filepath):
 	last_updated = Div(text='<b>Last updated:</b> ' + get_last_updated(filepath), name='Last '
 						'updated text', style={'font-size': '120%', 'color': 'white'}, width=150)
 	col_1 = column(date_selection, last_updated, make_NHS_website_link_paragraph(150))
-	row_1 = row(col_1, p, make_info_paragraph(150))
-	#col_2 = column(row_1, make_info_paragraph())
+	row_1 = row(col_1, p)
+	col_2 = column(row_1, make_info_paragraph(1000))
 	layout = row_1
 	tab = Panel(child=layout, title='Map')
 
