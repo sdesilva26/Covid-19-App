@@ -1,4 +1,4 @@
 # Covid-19-App
 
-![Alt Text](https://gfycat.com/flawedflawedindianpalmsquirrel)
+![Alt Text](covid-19-web-app-demo.gif)
 
