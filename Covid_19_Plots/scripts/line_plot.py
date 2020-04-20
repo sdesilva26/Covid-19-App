@@ -63,7 +63,7 @@ def line_tab(dataframe, tab_title, filepath):
 			                 color=color)
 
 			hover = HoverTool(tooltips =[('Group', group),
-					    ('Date','@index{%F}'),(y_title,'@y{int}')],
+					    ('Date','@index{%F}'),(y_title,'$y{int}')],
 					    formatters={'@index': 'datetime'},  renderers=[circle])
 
 			p.add_tools(hover)
