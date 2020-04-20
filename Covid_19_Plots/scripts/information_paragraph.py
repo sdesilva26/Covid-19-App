@@ -21,10 +21,26 @@ information = "<h3> Information</h3>" \
               "homes. This approach makes it possible to compile deaths data on a daily basis " \
               "using up to date figures.\"</blockquote></i></p> "
 
+nhs_website_info = "<hr><p>Consider donating to the NHS at the following links:</p> <a " \
+                   "href=https://www.justgiving.com/campaign/nhscharities-covid19urgentappeal " \
+                   "target=_blank>" \
+                   "JustGiving</a></br></br></li> <a " \
+                   "href=https://uk.virginmoneygiving.com/fundraiser-display/showROFundraiserPage" \
+                   "?userUrl=ClapForOurCarers&pageUrl=2 " \
+                   "target=_blank>Virgin Money Giving</a></br></br>" \
+                   "<a href=https://www.nhscharitiestogether.co.uk/ target=_blank>NHS Charities Together</a></li>"
 
-def make_info_paragraph():
-	information_para = Div(text=information, name='Information', width=150,
+
+def make_info_paragraph(width):
+	information_para = Div(text=information, name='Information', width=width,
 	                       style={'font-size': '100%', 'color': 'white'}, sizing_mode=
+	                       "scale_width")
+
+	return information_para
+
+def make_NHS_website_link_paragraph(width):
+	information_para = Div(text=nhs_website_info, name='Information', width=width,
+	                       style={'font-size': '120%', 'color': 'white'}, sizing_mode=
 	                       "scale_width")
 
 	return information_para

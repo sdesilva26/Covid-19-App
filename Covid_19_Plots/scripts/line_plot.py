@@ -1,7 +1,7 @@
 from bokeh.layouts import row, column
 from bokeh.models import Panel, Label
 from bokeh.models.widgets import Div
-from scripts.information_paragraph import make_info_paragraph
+from scripts.information_paragraph import make_info_paragraph, make_NHS_website_link_paragraph
 from scripts.utilities import get_last_updated
 y_label_title = {'Deaths Today': 'Deaths',
                  'Cumulative Total': 'Total deaths',
@@ -126,12 +126,12 @@ def line_tab(dataframe, tab_title, filepath):
 		1).unique().values[0]], name='Statistics explanation', width=150,
 	                        style={'font-size': '120%', 'color': 'white'})
 
-	last_updated = Div(text='<b>Last updated:</b> ' + get_last_updated(filepath), name='Last '
+	last_updated = Div(text='<hr><b>Last updated:</b> ' + get_last_updated(filepath), name='Last '
 	                                                                                  'updated '
 	                'text', style={'font-size': '120%', 'color': 'white'}, width=150)
 
-	col = column(statistic_selection, stats_explanation, last_updated)
-	two_col_row = row(col, make_plot(src), make_info_paragraph())
+	col = column(statistic_selection, stats_explanation, last_updated, make_NHS_website_link_paragraph(150))
+	two_col_row = row(col, make_plot(src), make_info_paragraph(150))
 	#layout = column(two_col_row, make_info_paragraph())
 	layout = two_col_row
 	tab = Panel(child=layout, title=tab_title)
