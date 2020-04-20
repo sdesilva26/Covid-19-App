@@ -1,5 +1,5 @@
 from bokeh.layouts import row, column
-from bokeh.models import Panel
+from bokeh.models import Panel, Label
 from bokeh.models.widgets import Div
 from scripts.information_paragraph import make_info_paragraph
 from scripts.utilities import get_last_updated
@@ -45,12 +45,13 @@ def map_tab(dataframe, google_api_key, filepath):
 		from bokeh.models import GMapOptions, HoverTool
 		from datetime import date
 
-		map_options = GMapOptions(lat=53.200817,lng=-1.488043, map_type="hybrid", zoom=7,
+		map_options = GMapOptions(lat=53.200817,lng=-1.488043, map_type="hybrid", zoom=6,
 		                          scale_control=True)
 
 
 		p = gmap(api_key, map_options, title="Covid-19 deaths by Trust - (Updated " + str(
-			date.today()) + ")", plot_width=900, plot_height=600)
+			date.today()) + ")", plot_width=900, plot_height=600, background_fill_color="black",
+		         border_fill_color='#2F2F2F')
 
 		hover = HoverTool(tooltips =[
 			('Name','@Name'),('Deaths','@Deaths')])
@@ -59,6 +60,13 @@ def map_tab(dataframe, google_api_key, filepath):
 		p.circle(x="Longitude", y="Latitude", size='Size', fill_alpha=0.8, source=src,
 		         legend_group="Region", fill_color = 'Color', line_color='black', line_width=0.5)
 
+		# date_selection_active = date_selection.value
+		# date_text = Label(x=10, y=530, x_units='screen', y_units='screen',
+		#                  text=date_selection.value, render_mode='css',
+		#                  background_fill_color='white', background_fill_alpha=0,
+		#                   text_color='black', text_font_size="14pt", name = 'date_text')
+
+		# p.add_layout(date_text)
 		p.legend.click_policy="hide"
 		p.legend.location = "top_left"
 		p = style(p)
@@ -96,7 +104,6 @@ def map_tab(dataframe, google_api_key, filepath):
 
 	def callback(attr, old, new):
 		new_src = make_dataset(date_selection.value)
-
 		src.data.update(new_src.data)
 
 
@@ -115,9 +122,9 @@ def map_tab(dataframe, google_api_key, filepath):
 	last_updated = Div(text='<b>Last updated:</b> ' + get_last_updated(filepath), name='Last '
 						'updated text', style={'font-size': '120%', 'color': 'white'}, width=150)
 	col_1 = column(date_selection, last_updated)
-	row_1 = row(col_1, p)
-	col_2 = column(row_1, make_info_paragraph())
-	layout = col_2
+	row_1 = row(col_1, p, make_info_paragraph())
+	#col_2 = column(row_1, make_info_paragraph())
+	layout = row_1
 	tab = Panel(child=layout, title='Map')
 
 	return tab

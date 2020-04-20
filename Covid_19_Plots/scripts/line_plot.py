@@ -30,9 +30,13 @@ def line_tab(dataframe, tab_title, filepath):
 		from bokeh.plotting import ColumnDataSource
 		df = dataframe
 
+		type_of_data = dataframe.columns.get_level_values(0).name
 		groups = dataframe.columns.get_level_values(0).unique().values
 		new_df = pd.DataFrame(dataframe.T.loc[(groups, type_of_plot),:].T.values, columns=groups,
 		                      index=dataframe.index)
+		# new_df = new_df.T.unstack().reset_index(level=1, name='Deaths').rename(columns={
+		# 	'level_1':type_of_data})[[
+		# 	'Deaths',type_of_data]]
 
 		new_src = ColumnDataSource(new_df)
 
@@ -45,6 +49,7 @@ def line_tab(dataframe, tab_title, filepath):
 		import itertools
 
 		groups = dataframe.columns.get_level_values(0).unique().values
+		type_of_data = dataframe.columns.get_level_values(0).name
 
 		y_title = y_label_title[statistic_selection.value]
 
@@ -54,14 +59,17 @@ def line_tab(dataframe, tab_title, filepath):
 		colors = itertools.cycle(palette)
 
 		for group, color in zip(groups, colors):
-			p.line(x='index', y=group, source=src, line_width=1, legend_label=group, color=color)
-			p.circle(x='index', y=group, source=src, size=6, legend_label=group, color=color)
+		# p.line(x='index', y='Deaths', source=src, line_width=1, legend_label=type_of_data)
+		# p.circle(x='index', y='Deaths', source=src, size=6, legend_label=type_of_data)
+			p.multi_line(xs='index', ys=group,
+		             line_width=5, line_alpha=0.6, hover_line_alpha=1.0,
+		             source=src)
 
-			hover = HoverTool(tooltips =[
-				('Date','@index{%F}'),(y_title,'$y{0}')],
-				formatters={'@index': 'datetime'})
+		hover = HoverTool(tooltips =[(type_of_data, '@columns}'),
+		 	('Date','@index{%F}'),(y_title,'@Deaths{0}')],
+		 	formatters={'@index': 'datetime'})
 
-			p.add_tools(hover)
+		p.add_tools(hover)
 
 		p.legend.location = "top_left"
 		p.legend.click_policy="hide"
@@ -126,8 +134,9 @@ def line_tab(dataframe, tab_title, filepath):
 	                'text', style={'font-size': '120%', 'color': 'white'}, width=150)
 
 	col = column(statistic_selection, stats_explanation, last_updated)
-	two_col_row = row(col, make_plot(src))
-	layout = column(two_col_row, make_info_paragraph())
+	two_col_row = row(col, make_plot(src), make_info_paragraph())
+	#layout = column(two_col_row, make_info_paragraph())
+	layout = two_col_row
 	tab = Panel(child=layout, title=tab_title)
 
 	return tab
