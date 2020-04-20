@@ -139,7 +139,7 @@ def map_tab(dataframe, google_api_key, filepath):
 	col_1 = column(date_selection, last_updated, make_NHS_website_link_paragraph(150))
 	row_1 = row(col_1, p)
 	col_2 = column(row_1, make_info_paragraph(1000))
-	layout = row_1
+	layout = col_2
 	tab = Panel(child=layout, title='Map')
 
 	return tab

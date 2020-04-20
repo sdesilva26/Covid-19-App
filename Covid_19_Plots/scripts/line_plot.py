@@ -133,7 +133,7 @@ def line_tab(dataframe, tab_title, filepath):
 	col = column(statistic_selection, stats_explanation, last_updated, make_NHS_website_link_paragraph(150))
 	two_col_row = row(col, make_plot(src))
 	layout = column(two_col_row, make_info_paragraph(1000))
-	layout = two_col_row
+	#layout = two_col_row
 	tab = Panel(child=layout, title=tab_title)
 
 	return tab
