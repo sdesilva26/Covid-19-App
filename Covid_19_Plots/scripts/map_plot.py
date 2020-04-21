@@ -35,7 +35,7 @@ def map_tab(dataframe, google_api_key, filepath):
 		else:
 			scaler = MinMaxScaler(feature_range=(0,0.8))
 			scaler.fit(df[[dataframe.columns[-6]]])
-			df['Size'] = 50*scaler.transform(df[[col]])
+			df['Size'] = 40*scaler.transform(df[[col]])
 
 		return df
 
