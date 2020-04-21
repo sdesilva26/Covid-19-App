@@ -30,6 +30,13 @@ The app should now pop up in your internet browser in a new window
 7. [optional] To keep the data up to date set up a cron job that runs the cron_script.sh daily
  after 2pm as this is when NHS England's daily data release occurs 
 
+## Credit
+Two great resources inspired and allowed me to set this up.
 
-
+For the bokeh plots Will Koehrsen's three part Medium [blog](https://towardsdatascience.com/data-visualization-with-bokeh-in-python-part-one-getting-started-a11655a467d4) were a huge help, particularly in
+ setting up interactive plots. 
+ 
+ For the inspiration to create a live web app and how to deploy it to heroku see Max Pumperla's own
+  Covid-19 [github](https://github.com/maxpumperla/covid-19-vis) repo.
+ 
 
