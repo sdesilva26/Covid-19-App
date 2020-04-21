@@ -3,6 +3,7 @@
 def clean_data(filepath):
 	import pandas as pd
 	import datetime
+	import numpy as np
 	raw_data_trusts = pd.read_excel(filepath, sheet_name="COVID19 total deaths by trust", header=15)
 	raw_data_region = pd.read_excel(filepath, sheet_name="COVID19 total deaths by region", header=15)
 	raw_data_age = pd.read_excel(filepath, sheet_name="COVID19 total deaths by age", header=15)
@@ -30,6 +31,10 @@ def clean_data(filepath):
 	df = raw_data_region.transpose()[1:]
 	df.columns = raw_data_region['NHS England Region'].unique()
 	raw_data_region = df
+
+	# For both regional and age datasets add an "All" group
+	raw_data_region['All'] = raw_data_region.apply(lambda x: np.sum(x), axis=1)
+	raw_data_age['All'] = raw_data_age.apply(lambda x: np.sum(x), axis=1)
 
 	# drop the time from datetime columns in trusts dataset
 	df = raw_data_trusts
@@ -75,14 +80,14 @@ def add_statistics(dataframe):
 	import numpy as np
 
 	array = [dataframe.columns.values,
-	         ['Deaths Today', 'Cumulative Total', 'Change', 'Relative Change']]
+	         ['Deaths', 'Cumulative Total', 'Change', 'Relative Change']]
 
 	index = pd.MultiIndex.from_product(array, names=['Age group', 'Death data'])
 
 	df_restructure = pd.DataFrame(index = dataframe.index, columns=index)
 
 	for col in dataframe.columns:
-		df_restructure.loc[:, (col, 'Deaths Today')] = dataframe[col]
+		df_restructure.loc[:, (col, 'Deaths')] = dataframe[col]
 		df_restructure.loc[:, (col, 'Change')] = dataframe[col].diff()
 		df_restructure.loc[:, (col, 'Relative Change')] = dataframe[col].pct_change()*100
 		df_restructure.loc[:, (col, 'Cumulative Total')] = dataframe[col].values.cumsum()

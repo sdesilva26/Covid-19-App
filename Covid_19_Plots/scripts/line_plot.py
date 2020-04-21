@@ -3,11 +3,11 @@ from bokeh.models import Panel, Label
 from bokeh.models.widgets import Div
 from scripts.information_paragraph import make_info_paragraph, make_NHS_website_link_paragraph
 from scripts.utilities import get_last_updated
-y_label_title = {'Deaths Today': 'Deaths',
+y_label_title = {'Deaths': 'Deaths',
                  'Cumulative Total': 'Total deaths',
                  'Change': 'Change in deaths',
                  'Relative Change': 'Change in deaths (%)'}
-stats_explanations = {'Deaths Today': '</br> <b>Deaths Today:</b> the deaths recorded today that '
+stats_explanations = {'Deaths': '</br> <b>Deaths:</b> the deaths recorded each day that '
                                       'list '
                                       'Covid-19 as cause of death',
                  'Cumulative Total': '</br><b>Cumulative Total:</b> the total deaths recorded up '

@@ -59,7 +59,7 @@ def get_last_updated(filepath):
 	from datetime import datetime
 	import os
 	import pytz
-	modTimeSinceEpoch = os.path.getctime(filepath)
+	modTimeSinceEpoch = os.path.getmtime(filepath)
 	modTimeUTC = datetime.utcfromtimestamp(modTimeSinceEpoch).replace(tzinfo=pytz.utc)
 	tz = pytz.timezone('Europe/London')
 	dt = modTimeUTC.astimezone(tz)
