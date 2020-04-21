@@ -33,8 +33,12 @@ def clean_data(filepath):
 	raw_data_region = df
 
 	# For both regional and age datasets add an "All" group
-	raw_data_region['All'] = raw_data_region.apply(lambda x: np.sum(x), axis=1)
-	raw_data_age['All'] = raw_data_age.apply(lambda x: np.sum(x), axis=1)
+	for df in [raw_data_age, raw_data_region]:
+		new_df = pd.DataFrame(df.apply(lambda x: np.sum(x), axis=1), columns=['All'])
+		df.insert(loc=0, value=new_df, column='All')
+
+	#raw_data_region['All'] = raw_data_region.apply(lambda x: np.sum(x), axis=1)
+	#raw_data_age['All'] = raw_data_age.apply(lambda x: np.sum(x), axis=1)
 
 	# drop the time from datetime columns in trusts dataset
 	df = raw_data_trusts

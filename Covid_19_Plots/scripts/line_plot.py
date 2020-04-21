@@ -53,7 +53,8 @@ def line_tab(dataframe, tab_title, filepath):
 		y_title = y_label_title[statistic_selection.value]
 
 		p = figure(title="Statistics about deaths in the UK grouped by " + tab_title, x_axis_label='Date',
-		            y_axis_label=y_title, x_axis_type="datetime", plot_width=900, plot_height=600)
+		            y_axis_label=y_title, x_axis_type="datetime", plot_width=900, plot_height=600,
+		           sizing_mode='stretch_both')
 
 		colors = itertools.cycle(palette)
 

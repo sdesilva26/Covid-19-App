@@ -15,6 +15,7 @@ def map_tab(dataframe, google_api_key, filepath):
 		import itertools
 		from bokeh.palettes import Dark2_8 as palette
 		colors = itertools.cycle(palette)
+		next(colors)
 		groups = dataframe['NHS England Region'].unique()
 		colormap = dict()
 		for color, group in zip(colors, groups):
@@ -24,7 +25,6 @@ def map_tab(dataframe, google_api_key, filepath):
 
 	def add_plot_styles(col):
 		from sklearn.preprocessing import MinMaxScaler
-		from bokeh.palettes import Dark2_8 as palette
 		df = dataframe
 		cmap = make_colormap(dataframe)
 		df['color'] = df['NHS England Region'].apply(lambda x: cmap[x])
@@ -65,7 +65,7 @@ def map_tab(dataframe, google_api_key, filepath):
 
 
 		p = gmap(api_key, map_options, title="Covid-19 deaths by Trust", plot_width=900, plot_height=600, background_fill_color="black",
-		         border_fill_color='#2F2F2F')
+		         border_fill_color='#2F2F2F', sizing_mode='stretch_both')
 
 		hover = HoverTool(tooltips =[
 			('Name','@Name'),('Deaths','@Deaths')])
