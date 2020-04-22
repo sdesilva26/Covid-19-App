@@ -64,7 +64,8 @@ def map_tab(dataframe, google_api_key, filepath):
 		                          scale_control=True)
 
 
-		p = gmap(api_key, map_options, title="Covid-19 deaths by Trust", plot_width=900, plot_height=600, background_fill_color="black",
+		p = gmap(api_key, map_options, title="Covid-19 deaths by Trust", plot_width=1000,
+		         plot_height=600, background_fill_color="black",
 		         border_fill_color='#2F2F2F', sizing_mode='stretch_both')
 
 		hover = HoverTool(tooltips =[
