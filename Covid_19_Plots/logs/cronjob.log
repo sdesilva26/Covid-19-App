@@ -1,8 +1,4 @@
 Already on 'master'
 M	Covid_19_Plots/logs/cronjob.log
-M	Covid_19_Plots/main.py
-M	Covid_19_Plots/scripts/__pycache__/line_plot.cpython-37.pyc
-M	Covid_19_Plots/scripts/__pycache__/map_plot.cpython-37.pyc
-M	Covid_19_Plots/scripts/line_plot.py
-M	Covid_19_Plots/scripts/map_plot.py
-Your branch is up to date with 'origin/master'.
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
