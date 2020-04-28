@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 /Users/shane/Documents/Repositories/Covid-19-App/Covid_19_Plots/scripts/cron_script.sh: line 2: cd: /Users/shane/Documents/Repositories/Portfolio/Covid_19_Plots/: No such file or directory
 fatal: not a git repository (or any of the parent directories): .git
 fatal: not a git repository (or any of the parent directories): .git
+=======
+Already on 'master'
+M	Covid_19_Plots/logs/cronjob.log
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+>>>>>>> 4c32334aecf3fd0a6e8048523fc80a2252e0939e
