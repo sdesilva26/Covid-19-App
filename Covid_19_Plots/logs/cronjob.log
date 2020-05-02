@@ -2,3 +2,25 @@ Already on 'master'
 M	Covid_19_Plots/logs/cronjob.log
 Your branch is ahead of 'origin/master' by 2 commits.
   (use "git push" to publish your local commits)
+[master 59443f4] cron commit with updated data
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+remote: Compressing source files... done.        
+remote: Building source:        
+remote: 
+remote: -----> Python app detected        
+remote: -----> No change in requirements detected, installing from cache        
+remote: -----> Installing SQLite3        
+remote: -----> Installing requirements with pip        
+remote: -----> Discovering process types        
+remote:        Procfile declares types -> web        
+remote: 
+remote: -----> Compressing...        
+remote:        Done: 143M        
+remote: -----> Launching...        
+remote:        Released v43        
+remote:        https://covid-19-uk-bokeh-plots.herokuapp.com/ deployed to Heroku        
+remote: 
+remote: Verifying deploy... done.        
+To https://git.heroku.com/covid-19-uk-bokeh-plots.git
+   4fcd51f..59443f4  master -> master
+fatal: could not read Username for 'https://github.com': Device not configured
