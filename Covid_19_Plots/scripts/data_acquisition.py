@@ -14,7 +14,7 @@ def get_todays_data(url, filename, today=True):
 	else:
 		dateTimeObj = date.today() - timedelta(days=1)
 
-	timestampStr = dateTimeObj.strftime("%d %B %y")
+	timestampStr = dateTimeObj.strftime("%-d %B %y")
 
 	all_hplinks = soup.find_all('a')
 	index = []
