@@ -4,9 +4,9 @@ def clean_data(filepath):
 	import pandas as pd
 	import datetime
 	import numpy as np
-	raw_data_trusts = pd.read_excel(filepath, sheet_name="COVID19 total deaths by trust", header=15)
-	raw_data_region = pd.read_excel(filepath, sheet_name="COVID19 total deaths by region", header=15)
-	raw_data_age = pd.read_excel(filepath, sheet_name="COVID19 total deaths by age", header=15)
+	raw_data_trusts = pd.read_excel(filepath, sheet_name="Tab4 Deaths by trust", header=15)
+	raw_data_region = pd.read_excel(filepath, sheet_name="Tab1 Deaths by region", header=15)
+	raw_data_age = pd.read_excel(filepath, sheet_name="Tab3 Deaths by age", header=15)
 
 	# Remove empty columns values from datasets
 	for dataset in [raw_data_region, raw_data_age, raw_data_trusts]:
@@ -24,7 +24,7 @@ def clean_data(filepath):
 
 	# Switch the index to use the dates for the age dataset
 	df = raw_data_age.transpose()[1:]
-	df.columns = raw_data_age['Age group'].unique()
+	df.columns = raw_data_age['Age group (years)'].unique()
 	raw_data_age = df
 
 	# Switch the index to use the dates for the region dataset
