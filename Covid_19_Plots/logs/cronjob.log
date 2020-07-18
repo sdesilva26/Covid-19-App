@@ -1,29 +1,4 @@
 Already on 'master'
 M	Covid_19_Plots/logs/cronjob.log
-Your branch is ahead of 'origin/master' by 31 commits.
+Your branch is ahead of 'origin/master' by 1 commit.
   (use "git push" to publish your local commits)
-[master ebee786] cron commit with updated data
- 2 files changed, 1 insertion(+), 1 deletion(-)
- rewrite Covid_19_Plots/data/COVID-19-total-announced-deaths.xlsx (88%)
-remote: Compressing source files... done.        
-remote: Building source:        
-remote: 
-remote: -----> Python app detected        
-remote:  !     Python has released a security update! Please consider upgrading to python-3.7.7        
-remote:        Learn More: https://devcenter.heroku.com/articles/python-runtimes        
-remote: -----> No change in requirements detected, installing from cache        
-remote: -----> Installing SQLite3        
-remote: -----> Installing requirements with pip        
-remote: -----> Discovering process types        
-remote:        Procfile declares types -> web        
-remote: 
-remote: -----> Compressing...        
-remote:        Done: 143.1M        
-remote: -----> Launching...        
-remote:        Released v79        
-remote:        https://covid-19-uk-bokeh-plots.herokuapp.com/ deployed to Heroku        
-remote: 
-remote: Verifying deploy... done.        
-To https://git.heroku.com/covid-19-uk-bokeh-plots.git
-   449e4d4..ebee786  master -> master
-fatal: could not read Username for 'https://github.com': Device not configured
