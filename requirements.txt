@@ -2,7 +2,7 @@ bokeh==2.0.1
 bs4==0.0.1
 geopy==1.21.0
 numpy==1.18.2
-requests==2.23.0
+requests==2.31.0
 sklearn==0.0
 pandas==1.0.3
 xlrd==1.2.0
